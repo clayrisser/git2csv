@@ -22,7 +22,9 @@ npm install -g git2csv
 
 ## Usage
 
-[Contribute](https://github.com/codejamninja/git2csv/blob/master/CONTRIBUTING.md) usage docs
+```sh
+git log | git2csv commits.csv
+```
 
 ## Support
 
