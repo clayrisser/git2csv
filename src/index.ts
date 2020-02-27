@@ -1,3 +1,4 @@
+import CSV from 'csv-string';
 import { Commit } from './types';
 
 export function parseGitLog(gitLog: string): Commit[] {
@@ -30,21 +31,20 @@ export function parseGitLog(gitLog: string): Commit[] {
 }
 
 export function commits2Csv(commits: Commit[]): string {
-  const csv = [
-    ['date', 'message', 'hash', 'authorName', 'authorEmail'].join(','),
-    ...commits.reduce((lines: string[], commit: Commit) => {
+  return CSV.stringify([
+    ['date', 'message', 'hash', 'authorName', 'authorEmail'],
+    ...commits.reduce((lines: string[][], commit: Commit) => {
       const line = [
-        commit.date.toString().replace(/,/g, ','),
-        commit.message.replace(/,/g, ','),
+        commit.date.toUTCString(),
+        commit.message,
         commit.hash,
-        commit.author.name.replace(/,/g, ','),
-        commit.author.email.replace(/,/g, ',')
-      ].join(',');
+        commit.author.name,
+        commit.author.email
+      ];
       lines.push(line);
       return lines;
     }, [])
-  ].join('\n');
-  return `${csv}\n`;
+  ]);
 }
 
 export default function git2Csv(gitLog: string): string {

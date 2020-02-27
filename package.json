@@ -38,8 +38,8 @@
     "clean:purge": "jest --clearCache && git clean -fXd",
     "format": "prettier --write ./**/*.{json,md,scss,yaml,yml,js,jsx,ts,tsx} --ignore-path .gitignore",
     "lint": "npm run format && tsc --allowJs --noEmit && eslint --ext .ts,.tsx ./",
+    "prepare": "rm node_modules/csv-string/index.d.ts 2>/dev/null || true && npm run build",
     "lint:fix": "npm run format && tsc --noEmit && eslint --ext .ts,.tsx --fix ./",
-    "prepublish": "npm run build",
     "start": "babel-node --extensions \".ts,.tsx\" src/bin",
     "test": "npm run lint && jest"
   },
@@ -48,7 +48,9 @@
     "@oclif/command": "^1.5.19",
     "@oclif/errors": "^1.2.2",
     "@oclif/plugin-help": "^2.2.3",
+    "convert-array-to-csv": "^1.0.10",
     "core-js": "^3.1.3",
+    "csv-string": "^3.1.8",
     "fs-extra": "^8.1.0",
     "readline": "^1.3.0"
   },

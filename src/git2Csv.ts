@@ -30,8 +30,8 @@ export default class Git2Csv extends Command {
         readline.on('close', () => resolve(lines));
         readline.on('error', reject);
       })
-    ).join('');
-    await fs.writeFile(outputPath, git2Csv(input));
+    ).join('\n');
+    await fs.writeFile(outputPath, git2Csv(`${input}\n`));
     logger.info(`created ${outputPath}`);
   }
 }
